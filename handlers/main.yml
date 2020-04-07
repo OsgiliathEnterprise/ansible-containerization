@@ -2,6 +2,7 @@
 # handlers file for docker
 
 - name: docker | daemon restart
-  service:
+  systemd:
     name: docker
     state: restarted
+  become: yes
