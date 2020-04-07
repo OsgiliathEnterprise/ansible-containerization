@@ -6,7 +6,32 @@ This role enriches the original [crivetimihai virtualization collection docker r
 Requirements
 ------------
 
+Be sure on  Fedora 31 to set cgroup as v1 instead of the default v2 one:
+```
+sudo dnf install -y grubby && \
+  sudo grubby \
+  --update-kernel=ALL \
+  --args=”systemd.unified_cgroup_hierarchy=0"
+```
+See [this post for an explanation](https://fedoraproject.org/wiki/Changes/CGroupsV2)
+
 You should first execute `./configure` first, which will download the requirements in siblings folders
+
+Molecule tests
+--------------
+
+To execute test, build your own Fedora-31 Packer image enabling cgroup V1 and call it platform/fedora-31.
+Procedure:
+
+```
+git clone git@github.com:chef/bento.git
+cd "$(dirname ${BASH_SOURCE[0]})/bento/packer_templates/fedora-31"
+sed -i -e "s/dnf -y install \(.*\)/dnf -y install \1 grubby \&\& grubby --update-kernel=ALL --args=\"systemd.unified_cgroup_hierarchy=0\" --make-default/" bento/packer_templates/fedora/scripts/install-supporting-packages.sh
+packer build -var "box_basename=fedora-31-x86-64" -only=$PACKER_VM_DRIVER fedora-31-x86-64.json
+
+cd "$(dirname ${BASH_SOURCE[0]})/bento/builds
+vagrant box add fedora-31-x86_64.virtualbox.box --name platform/fedora-31
+```
 
 Role Variables
 --------------
