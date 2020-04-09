@@ -21,3 +21,9 @@ def test_docker_storage_is_overlay2(host):
     command = """sudo docker info | grep -c 'overlay2'"""
     cmd = host.run(command)
     assert '1' in cmd.stdout
+
+
+def test_docker_group_exists(host):
+    command = """sudo cat /etc/group | grep -c 'docker'"""
+    cmd = host.run(command)
+    assert '1' in cmd.stdout

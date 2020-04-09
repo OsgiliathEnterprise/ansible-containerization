@@ -6,6 +6,7 @@
     path: /etc/docker
     state: directory
   become: true
+
 - name: docker | copy filesystem driver
   copy:
     src: daemon.json
