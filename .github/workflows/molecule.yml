@@ -6,7 +6,7 @@ name: Molecule
 # events but only for the master branch
 on:
   push:
-  pull:
+  pull_request:
     branches:
       - master
       - tags/*
