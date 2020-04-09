@@ -10,7 +10,7 @@ driver:
 lint: yamllint
 platforms:
   - name: Fedora-Molecule-Docker
-    box: platform/fedora-31
+    box: tcharl/fedora-31-cgroupv1
     groups:
       - lvm
     provider_override_args:
