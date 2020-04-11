@@ -1,4 +1,4 @@
-Docker OverlayFS
+Containerization OverlayFS
 =========
 
 This role enriches the original [crivetimihai virtualization collection docker role](https://github.com/crivetimihai/ansible_virtualization/tree/master/roles/docker) and use the [Ansible manage lvm plus](https://github.com/OsgiliathEnterprise/ansible-manage-lvm-plus) role in order to add overlayfs driver support configuration on docker
@@ -15,7 +15,10 @@ sudo dnf install -y grubby && \
 ```
 See [this post for an explanation](https://fedoraproject.org/wiki/Changes/CGroupsV2)
 
-You should first execute `./configure` first, which will download the requirements in siblings folders
+You should first execute `./configure` first, which will download the requirements in siblings folders.
+As this role is also using some roles coming from collections, you'll hale to update your ansible.cfg file:
+roles_path = ./roles:./roles/community:./roles/community/ansible_collections/crivetimihai/roles
+
 
 Molecule tests
 --------------
