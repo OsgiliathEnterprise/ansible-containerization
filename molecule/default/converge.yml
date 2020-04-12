@@ -4,4 +4,4 @@
   tasks:
     - name: "Include docker"
       include_role:
-        name: "docker"
+        name: "ansible-docker"

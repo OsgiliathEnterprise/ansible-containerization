@@ -9,19 +9,20 @@ driver:
     name: libvirt
 lint: yamllint
 platforms:
-  - name: Fedora-Molecule-LVM
-    box: fedora/31-cloud-base
-    # box-url: ${platform_root}/packer/bento/builds/fedora-31-x86_64.virtualbox.box
+  - name: Fedora-Molecule-Docker
+    box: tcharl/fedora-31-cgroupv1
     groups:
       - lvm
     provider_override_args:
       - "persistent_storage.enabled = true"
-      - "persistent_storage.location = 'molecule-lvm.vdi'"
+      - "persistent_storage.location = 'molecule-docker.vdi'"
       - "persistent_storage.size = 100"
       - "persistent_storage.mount = false"
       - "persistent_storage.diskdevice = '/dev/sdb'"
 provisioner:
   name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ../../..:../../../community:../../../community/ansible_collections/crivetimihai/roles
   inventory:
     group_vars:
       lvm:
@@ -41,6 +42,7 @@ provisioner:
                 filesystem2: xfs
                 mntp: /var/lib/docker
                 mount2: true
+                mopts: defaults,pquota,gquota,quota
               - lvname: thinpoolmeta
                 size: 10%VG
                 opts: "--wipesignatures y"
