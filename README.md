@@ -7,7 +7,7 @@ Requirements
 ------------
 
 Be sure on  Fedora 31 to set cgroup as v1 instead of the default v2 one:
-```
+```shell script
 sudo dnf install -y grubby && \
   sudo grubby \
   --update-kernel=ALL \
@@ -26,7 +26,7 @@ Molecule tests
 To execute test, build your own Fedora-31 Packer image enabling cgroup V1 and call it platform/fedora-31.
 Procedure:
 
-```
+```shell script
 git clone git@github.com:chef/bento.git
 cd "$(dirname ${BASH_SOURCE[0]})/bento/packer_templates/fedora-31"
 sed -i -e "s/dnf -y install \(.*\)/dnf -y install \1 grubby \&\& grubby --update-kernel=ALL --args=\"systemd.unified_cgroup_hierarchy=0\" --make-default/" bento/packer_templates/fedora/scripts/install-supporting-packages.sh
@@ -62,6 +62,6 @@ License
 Author Information
 ------------------
 
-Twitter [@tcharl](https://twitter.com/Tcharl)
-Github [@tcharl](https://github.com/Tcharl)
-LinkedIn [Charlie Mordant](https://www.linkedin.com/in/charlie-mordant-51796a97/)
+* Twitter [@tcharl](https://twitter.com/Tcharl)
+* Github [@tcharl](https://github.com/Tcharl)
+* LinkedIn [Charlie Mordant](https://www.linkedin.com/in/charlie-mordant-51796a97/)
