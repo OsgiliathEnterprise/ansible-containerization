@@ -9,13 +9,13 @@ driver:
     name: libvirt
 lint: yamllint
 platforms:
-  - name: Fedora-Molecule-Docker
+  - name: Fedora-Molecule-containerization
     box: tcharl/fedora-31-cgroupv1
     groups:
       - lvm
     provider_override_args:
       - "persistent_storage.enabled = true"
-      - "persistent_storage.location = 'molecule-docker.vdi'"
+      - "persistent_storage.location = 'molecule-containerization.vdi'"
       - "persistent_storage.size = 100"
       - "persistent_storage.mount = false"
       - "persistent_storage.diskdevice = '/dev/sdb'"

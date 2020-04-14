@@ -1,7 +1,7 @@
 Containerization OverlayFS
 =========
 
-This role enriches the original [crivetimihai virtualization collection docker role](https://github.com/crivetimihai/ansible_virtualization/tree/master/roles/docker) and use the [Ansible manage lvm plus](https://github.com/OsgiliathEnterprise/ansible-manage-lvm-plus) role in order to add overlayfs driver support configuration on docker
+This role enriches the original [crivetimihai virtualization collection docker role](https://github.com/crivetimihai/ansible_virtualization/tree/master/roles/docker) and use the [Ansible manage lvm plus](https://github.com/OsgiliathEnterprise/ansible-volumes) role in order to add overlayfs driver support configuration on docker
 
 Requirements
 ------------
@@ -39,19 +39,19 @@ vagrant box add fedora-31-x86_64.virtualbox.box --name platform/fedora-31
 Role Variables
 --------------
 
-Only [dependencies variables](https://github.com/OsgiliathEnterprise/ansible-docker/blob/master/molecule/default/molecule.yml) at all but those of the dependencies, see [molecule tests](https://github.com/OsgiliathEnterprise/ansible-docker/blob/master/molecule/default/tests/test_default.py) for more info.
+Only [dependencies variables](https://github.com/OsgiliathEnterprise/ansible-containerization/blob/master/molecule/default/molecule.yml) at all but those of the dependencies, see [molecule tests](https://github.com/OsgiliathEnterprise/ansible-docker/blob/master/molecule/default/tests/test_default.py) for more info.
 
 Dependencies
 ------------
 
 As said
  * [crivetimihai virtualization collection](https://galaxy.ansible.com/crivetimihai/virtualization)
- * [Ansible manage lvm plus](https://galaxy.ansible.com/tcharl/ansible_manage_lvm_plus)
+ * [Ansible ansible_volumes](https://galaxy.ansible.com/tcharl/ansible_volumes)
 
 Example Playbook
 ----------------
 
-See the [vars declared](https://github.com/OsgiliathEnterprise/ansible-docker/blob/master/molecule/default/molecule.yml) on the molecule test, as well as [their impact](https://github.com/OsgiliathEnterprise/ansible-docker/blob/master/molecule/default/tests/test_default.py) 
+See the [vars declared](https://github.com/OsgiliathEnterprise/ansible-containerization/blob/master/molecule/default/molecule.yml) on the molecule test, as well as [their impact](https://github.com/OsgiliathEnterprise/ansible-docker/blob/master/molecule/default/tests/test_default.py) 
 
 
 License
