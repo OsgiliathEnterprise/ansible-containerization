@@ -25,6 +25,7 @@ jobs:
 
       - name: install lint prerequisite
         run: |
+          sudo apt-get update
           sudo apt -y install python3-setuptools ansible-lint vagrant
 
       - name: Install molecule
