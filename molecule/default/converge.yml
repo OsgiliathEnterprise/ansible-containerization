@@ -15,9 +15,9 @@
             metadata: non-persistent/thinpoolmeta
             autoextendtreshold: 80
             autoextendpercent: 20
-            filesystem2: xfs
+            filesystem: xfs
             mntp: /var/lib/docker
-            mount2: true
+            mount: true
             mopts: defaults,pquota,gquota,quota
           - lvname: thinpoolmeta
             size: 10%VG
