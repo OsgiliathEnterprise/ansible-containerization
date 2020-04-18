@@ -12,7 +12,7 @@
     src: daemon.json
     dest: /etc/docker/daemon.json
   become: yes
-  notify: containerization | daemon restart
+  notify: containerization | restart daemon
 
 - name: containerization | start
   systemd:
