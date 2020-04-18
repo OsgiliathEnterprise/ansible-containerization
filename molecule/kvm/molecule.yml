@@ -2,12 +2,13 @@
 dependency:
   name: galaxy
   options:
-    role-file: ../../meta/main.yml
+    role-file: requirements.yml
+    roles-path: ../community
 driver:
   name: vagrant
   provider:
     name: libvirt
-lint: yamllint
+lint: yamllint . && flake8 && ansible-lint --exclude=meta
 platforms:
   - name: Fedora-Molecule-containerization
     box: tcharl/fedora-31-cgroupv1
@@ -21,38 +22,21 @@ platforms:
       - "persistent_storage.diskdevice = '/dev/sdb'"
 provisioner:
   name: ansible
+  inventory:
+    host_vars:
+      localhost:
+        ansible_python_interpreter: /usr/bin/python3
+  config_options:
+    defaults:
+      forks: 20
+    ssh_connection:
+      pipelining: true
+      ssh_args: -o ControlMaster=auto -o ControlPersist=600s
   env:
     ANSIBLE_ROLES_PATH: ../../..:../../../community:../../../community/ansible_collections/crivetimihai/roles
-  inventory:
-    group_vars:
-      lvm:
-        lvm_groups:
-          - vgname: non-persistent
-            disks:
-              - /dev/sdb1
-            create: true
-            lvnames:
-              - lvname: thinpool
-                size: 40%VG
-                opts: "--wipesignatures y"
-                create: true
-                metadata: non-persistent/thinpoolmeta
-                autoextendtreshold: 80
-                autoextendpercent: 20
-                filesystem2: xfs
-                mntp: /var/lib/docker
-                mount2: true
-                mopts: defaults,pquota,gquota,quota
-              - lvname: thinpoolmeta
-                size: 10%VG
-                opts: "--wipesignatures y"
-                create: true
-        manage_lvm: true
-  lint: ansible-lint
 verifier:
   name: testinfra
   env:
     PYTHONWARNINGS: "ignore:.*U.*mode is deprecated:DeprecationWarning"
   options:
     v: 1
-  lint: flake8

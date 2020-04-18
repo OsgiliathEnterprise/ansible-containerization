@@ -6,3 +6,4 @@
     name: docker
     state: restarted
   become: yes
+  listen: containerization | restart daemon
