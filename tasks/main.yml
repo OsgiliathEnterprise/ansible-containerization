@@ -11,12 +11,12 @@
   copy:
     src: daemon.json
     dest: /etc/docker/daemon.json
-  become: yes
+  become: true
   notify: containerization | restart daemon
 
 - name: containerization | start
   systemd:
     name: docker
     state: started
-    enabled: yes
-  become: yes
+    enabled: true
+  become: true
