@@ -4,6 +4,9 @@ roles:
   - name: tcharl.ansible_manage_lvm
     source: https://galaxy.ansible.com
     path: ../community
+  - name: tcharl.ansible_volumes
+    source: https://galaxy.ansible.com
+    path: ../community
   - name: geerlingguy.docker
     source: https://galaxy.ansible.com
     path: ../community
