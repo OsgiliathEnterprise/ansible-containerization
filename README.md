@@ -1,7 +1,13 @@
 Containerization OverlayFS
 =========
 
-This role enriches the original [crivetimihai virtualization collection docker role](https://github.com/crivetimihai/ansible_virtualization/tree/master/roles/docker) and use the [Ansible manage lvm plus](https://github.com/OsgiliathEnterprise/ansible-volumes) role in order to add overlayfs driver support configuration on docker
+
+* Galaxy: [![Ansible Galaxy](https://img.shields.io/badge/galaxy-tcharl.ansible_containerization-660198.svg?style=flat)](https://galaxy.ansible.com/tcharl/ansible_containerization)
+* Lint & requirements: ![Molecule](https://github.com/OsgiliathEnterprise/ansible-containerization/workflows/Molecule/badge.svg)
+* Tests: [![Build Status](https://travis-ci.org/OsgiliathEnterprise/ansible-containerization.svg?branch=master)](https://travis-ci.org/OsgiliathEnterprise/ansible-containerization)
+* Chat: [![Join the chat at https://gitter.im/OsgiliathEnterprise/platform](https://badges.gitter.im/OsgiliathEnterprise/platform.svg)](https://gitter.im/OsgiliathEnterprise/platform?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+This role enriches the original [geerlinguy docker role](https://github.com/geerlingguy/ansible-role-docker) and use the [Ansible volumes plus](https://github.com/OsgiliathEnterprise/ansible-volumes) role in order to add overlayfs driver support configuration on docker
 
 Requirements
 ------------
@@ -39,19 +45,19 @@ vagrant box add fedora-31-x86_64.virtualbox.box --name platform/fedora-31
 Role Variables
 --------------
 
-Only [dependencies variables](https://github.com/OsgiliathEnterprise/ansible-containerization/blob/master/molecule/default/molecule.yml) at all but those of the dependencies, see [molecule tests](https://github.com/OsgiliathEnterprise/ansible-docker/blob/master/molecule/default/tests/test_default.py) for more info.
+Only [dependencies variables](https://github.com/OsgiliathEnterprise/ansible-containerization/blob/master/molecule/default/molecule.yml) at all but those of the dependencies, see [molecule tests](https://github.com/OsgiliathEnterprise/ansible-containerization/blob/master/molecule/default/tests/test_default.py) for more info.
 
 Dependencies
 ------------
 
 As said
- * [crivetimihai virtualization collection](https://galaxy.ansible.com/crivetimihai/virtualization)
- * [Ansible ansible_volumes](https://galaxy.ansible.com/tcharl/ansible_volumes)
+ * [geerlinguy docker role](https://github.com/geerlingguy/ansible-role-docker)
+ * [Ansible volumes](https://galaxy.ansible.com/tcharl/ansible_volumes)
 
 Example Playbook
 ----------------
 
-See the [vars declared](https://github.com/OsgiliathEnterprise/ansible-containerization/blob/master/molecule/default/molecule.yml) on the molecule test, as well as [their impact](https://github.com/OsgiliathEnterprise/ansible-docker/blob/master/molecule/default/tests/test_default.py) 
+See the [vars declared](https://github.com/OsgiliathEnterprise/ansible-containerization/blob/master/molecule/default/molecule.yml) on the molecule test, as well as [their impact](https://github.com/OsgiliathEnterprise/ansible-containerization/blob/master/molecule/default/tests/test_default.py) 
 
 
 License
