@@ -7,7 +7,7 @@ Containerization OverlayFS
 * Tests: [![Build Status](https://travis-ci.org/OsgiliathEnterprise/ansible-containerization.svg?branch=master)](https://travis-ci.org/OsgiliathEnterprise/ansible-containerization)
 * Chat: [![Join the chat at https://gitter.im/OsgiliathEnterprise/platform](https://badges.gitter.im/OsgiliathEnterprise/platform.svg)](https://gitter.im/OsgiliathEnterprise/platform?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-This role enriches the original [geerlinguy docker role](https://github.com/geerlingguy/ansible-role-docker) and use the [Ansible volumes plus](https://github.com/OsgiliathEnterprise/ansible-volumes) role in order to add overlayfs driver support configuration on docker
+This role enriches the original [geerlinguy docker role](https://github.com/geerlingguy/ansible-role-docker) and use the [Ansible volumes plus](https://github.com/OsgiliathEnterprise/ansible-volumes) role in order to add overlayfs driver support configuration for docker
 
 Requirements
 ------------
@@ -41,6 +41,8 @@ packer build -var "box_basename=fedora-31-x86-64" -only=$PACKER_VM_DRIVER fedora
 cd "$(dirname ${BASH_SOURCE[0]})/bento/builds
 vagrant box add fedora-31-x86_64.virtualbox.box --name platform/fedora-31
 ```
+
+However, a base image with these properties has been published to vagrant cloud so executin `molecule test` will suffice!
 
 Role Variables
 --------------

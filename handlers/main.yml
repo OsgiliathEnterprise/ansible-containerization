@@ -1,9 +1,10 @@
 ---
 # handlers file for docker
 
-- name: containerization | daemon restart
+- name: containerization | service restart
   systemd:
     name: docker
+    daemon_reload: yes
     state: restarted
   become: yes
-  listen: containerization | restart daemon
+  listen: containerization | restart service
