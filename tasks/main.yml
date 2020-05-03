@@ -3,16 +3,26 @@
 
 - name: containerization | create directory
   file:
-    path: /etc/docker
+    path: "{{ ansible_containerization_configuration_folder }}"
     state: directory
   become: true
+
+- name: containerization | check docker volume is formatted in xfs
+  # at least xfs is executed twice if the partition has changed in the meantime
+  # then it tries to recreate the fs on the mounted fs which indeed fails...
+  shell: "xfs_info {{ ansible_containerization_docker_mountpoint }} | grep -c 'ftype=1'"
+  become: yes
+  register: mountedxfs
+  ignore_errors: true
+  changed_when: no
 
 - name: containerization | copy filesystem driver
   copy:
     src: daemon.json
-    dest: /etc/docker/daemon.json
+    dest: "{{ ansible_containerization_daemon_configuration_file }}"
   become: true
-  notify: containerization | restart daemon
+  notify: containerization | restart service
+  when: not mountedxfs is failed
 
 - name: containerization | start
   systemd:

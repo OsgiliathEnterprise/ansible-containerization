@@ -1,2 +1,6 @@
 ---
 # defaults file for docker
+
+ansible_containerization_configuration_folder: /etc/docker
+ansible_containerization_daemon_configuration_file: "{{ ansible_containerization_configuration_folder }}/daemon.json"
+ansible_containerization_docker_mountpoint: /var/lib/docker
