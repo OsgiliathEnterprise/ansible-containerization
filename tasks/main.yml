@@ -8,8 +8,6 @@
   become: true
 
 - name: containerization | check docker volume is formatted in xfs
-  # at least xfs is executed twice if the partition has changed in the meantime
-  # then it tries to recreate the fs on the mounted fs which indeed fails...
   shell: "xfs_info {{ ansible_containerization_docker_mountpoint }} | grep -c 'ftype=1'"
   become: yes
   register: mountedxfs
