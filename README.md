@@ -12,15 +12,6 @@ This role enriches the original [geerlinguy docker role](https://github.com/geer
 Requirements
 ------------
 
-Be sure on  Fedora 31 to set cgroup as v1 instead of the default v2 one:
-```shell script
-sudo dnf install -y grubby && \
-  sudo grubby \
-  --update-kernel=ALL \
-  --args=”systemd.unified_cgroup_hierarchy=0"
-```
-See [this post for an explanation](https://fedoraproject.org/wiki/Changes/CGroupsV2)
-
 You should first execute `./configure` first, which will download the requirements in siblings folders.
 As this role is also using some roles coming from collections, you'll hale to update your ansible.cfg file:
 roles_path = ./roles:./roles/community:./roles/community/ansible_collections/crivetimihai/roles
