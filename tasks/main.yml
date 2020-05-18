@@ -22,6 +22,14 @@
   notify: containerization | restart service
   when: not mountedxfs is failed
 
+- name: containerization | copy execution driver
+  copy:
+    src: exec-daemon.json
+    dest: "{{ ansible_containerization_daemon_configuration_file }}"
+  become: true
+  notify: containerization | restart service
+  when: mountedxfs is failed
+
 - name: containerization | start
   systemd:
     name: docker
