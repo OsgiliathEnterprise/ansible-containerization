@@ -4,3 +4,5 @@
 ansible_containerization_configuration_folder: /etc/docker
 ansible_containerization_daemon_configuration_file: "{{ ansible_containerization_configuration_folder }}/daemon.json"
 ansible_containerization_docker_mountpoint: /var/lib/docker
+ansible_containerization_firewall_zone: public
+ansible_containerization_docker_network_interface: docker0

@@ -27,3 +27,10 @@ def test_docker_group_exists(host):
     command = """sudo cat /etc/group | grep -c 'docker'"""
     cmd = host.run(command)
     assert '1' in cmd.stdout
+
+
+def test_docker_interface_is_configured_in_firewalld(host):
+    command = """sudo firewall-cmd --list-all --zone=public | \
+    grep -c 'docker0'"""
+    cmd = host.run(command)
+    assert '1' in cmd.stdout
