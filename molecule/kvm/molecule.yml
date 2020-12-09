@@ -12,8 +12,10 @@ lint: yamllint . && flake8 && ansible-lint --exclude=meta
 platforms:
   - name: Fedora-Molecule-Containerization-KVM
     box: tcharl/fedora-31-cgroupv1
-    cpus: 2
-    memory: 2048
+    provider_options:
+      driver: '"kvm"'
+      cpus: 2
+      memory: 2048
     provider_raw_config_args:
       - "storage :file, :size => '1G', :device => 'vdb'"
 provisioner:
