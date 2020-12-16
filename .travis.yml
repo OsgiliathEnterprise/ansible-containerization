@@ -36,5 +36,4 @@ install:
   - pip install molecule molecule-vagrant python-vagrant
   - sudo chmod o+rwx /var/run/libvirt/libvirt-sock
 
-script:
-  - travis_wait 30 molecule test --scenario-name kvm
+script: travis_wait 30 molecule test --scenario-name kvm
