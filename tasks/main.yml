@@ -30,6 +30,13 @@
   notify: containerization | restart service
   when: mountedxfs is failed
 
+- name: firewalld | start
+  systemd:
+    name: firewalld
+    state: started
+    enabled: true
+  become: true
+
 - name: containerization | start
   systemd:
     name: docker
