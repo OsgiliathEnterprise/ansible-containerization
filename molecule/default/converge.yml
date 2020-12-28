@@ -25,6 +25,6 @@
             create: true
     manage_lvm: true
   tasks:
-    - name: "Include docker"
+    - name: "Include ansible-containerization"
       include_role:
         name: "ansible-containerization"

@@ -29,4 +29,4 @@ verifier:
   env:
     PYTHONWARNINGS: "ignore:.*U.*mode is deprecated:DeprecationWarning"
   options:
-    v: 1
+    v: 3
