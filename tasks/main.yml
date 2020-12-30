@@ -7,10 +7,6 @@
     enabled: true
   become: true
 
-- import_role:
-    name: geerlingguy.docker
-  become: yes
-
 - name: containerization | create directory
   file:
     path: "{{ ansible_containerization_configuration_folder }}"
@@ -49,6 +45,9 @@
   notify: containerization | restart service
   when: mountedxfs is failed
 
+- import_role:
+    name: geerlingguy.docker
+  become: yes
 
 - name: containerization | start
   systemd:
