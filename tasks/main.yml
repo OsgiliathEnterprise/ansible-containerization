@@ -16,6 +16,12 @@
     mode: 0755
   become: true
 
+- name: ansible-volumes | install prerequisite
+  package:
+    name: xfsprogs
+    state: present
+  become: true
+
 - name: containerization | check docker volume is formatted in xfs
   shell: "xfs_info {{ ansible_containerization_docker_mountpoint }} | grep -c 'ftype=1'"
   become: yes
