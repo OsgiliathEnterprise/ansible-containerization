@@ -53,7 +53,7 @@
 
 - import_role:
     name: geerlingguy.docker
-  become: yes
+  become: true
 
 - name: containerization | start
   systemd:
