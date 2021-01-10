@@ -13,14 +13,13 @@ Requirements
 ------------
 
 You should first execute `./configure` first, which will download the requirements in siblings folders.
-As this role is also using some roles coming from collections, you'll hale to update your ansible.cfg file:
-roles_path = ./roles:./roles/community:./roles/community/ansible_collections/crivetimihai/roles
+roles_path = ./roles:./roles/community
 
 
 Molecule tests
 --------------
 
-To execute test, build your own Fedora-33 Packer image enabling cgroup V1 and call it platform/fedora-31.
+To execute test, build your own Fedora-33 Packer image enabling cgroup V1 and call it yourpseudo/fedora-33.
 Procedure:
 
 ```shell script
@@ -33,7 +32,7 @@ cd "$(dirname ${BASH_SOURCE[0]})/bento/builds
 vagrant box add $distroversion.virtualbox.box --name platform/$distroshortversion
 ```
 
-However, a base image with these properties has been published to vagrant cloud so executin `molecule test` will suffice!
+However, a base image (tcharl/fedora-33-cgroupv1) with these properties has been published to vagrant cloud so executin `molecule test` will suffice!
 
 Role Variables
 --------------
