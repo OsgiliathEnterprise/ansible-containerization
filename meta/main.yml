@@ -1,6 +1,7 @@
 ---
 galaxy_info:
-  author: Charlie Mordant
+  role_name: ansible_containerization
+  author: OsgiliathEnterprise
   description: Sets overlay2 driver for docker on top of an xfs-formatted disk
   company: Osgiliath Corp.
 
