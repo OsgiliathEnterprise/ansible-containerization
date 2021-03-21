@@ -18,8 +18,8 @@ platforms:
     instance_raw_config_args:
       - "cache.enable :dnf"
       - "cache.auto_detect = false"
-    provider_raw_config_args:
-      - "customize ['storagectl', :id, '--name', 'IDE', '--hostiocache', 'on']"
+#    provider_raw_config_args:
+#      - "customize ['storagectl', :id, '--name', 'IDE', '--hostiocache', 'on']"
     provider_override_args:
       - "persistent_storage.enabled = true"
       - "persistent_storage.location = 'molecule-containerization.vdi'"
@@ -29,7 +29,7 @@ platforms:
 provisioner:
   name: ansible
   env:
-    ANSIBLE_ROLES_PATH: ../../..:../../../community
+    ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH}:../../../community
 verifier:
   name: testinfra
   env:
