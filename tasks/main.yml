@@ -68,24 +68,12 @@
     enabled: true
   become: true
 
-- name: install firewalld
-  become: "{{ firewalld_become }}"
-  package:
-    name: firewalld
-    state: present
-
-- name: enable and start firewalld
-  become: "{{ firewalld_become }}"
-  service:
-    name: firewalld
-    state: started
-    enabled: true
-
-- name: ansible-containerization | zone | affect nics
-  become: yes
-  ansible.posix.firewalld:
-    zone: "{{ ansible_containerization_firewall_zone | default('public') }}"
-    permanent: true
-    immediate: true
-    interface: "{{ ansible_containerization_docker_network_interface }}"
-    state: enabled
+- name: containerization | add docker0 interface to public firewall zone
+  include_role:
+    name: tcharl.ansible_routing
+  vars:
+    firewalld_zones:
+      - name: "{{ ansible_containerization_firewall_zone }}"
+        nics:
+          - "{{ ansible_containerization_docker_network_interface }}"
+    virtual_hosts: []
