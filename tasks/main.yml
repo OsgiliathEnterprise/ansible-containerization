@@ -76,4 +76,4 @@
       - name: "{{ ansible_containerization_firewall_zone }}"
         nics:
           - "{{ ansible_containerization_docker_network_interface }}"
-    virtual_hosts: omit
+    virtual_hosts: []
