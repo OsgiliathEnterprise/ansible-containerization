@@ -69,7 +69,7 @@
   become: true
 
 - name: containerization | add docker0 interface to public firewall zone
-  import_role:
+  include_role:
     name: tcharl.ansible_routing
   vars:
     firewalld_zones:
