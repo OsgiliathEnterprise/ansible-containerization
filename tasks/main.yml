@@ -1,14 +1,14 @@
 ---
 # tasks file for docker
 - name: containerization | start firewalld
-  systemd:
+  ansible.builtin.systemd:
     name: firewalld
     state: started
     enabled: true
   become: true
 
 - name: containerization | create directory
-  file:
+  ansible.builtin.file:
     path: "{{ ansible_containerization_configuration_folder }}"
     state: directory
     owner: root
@@ -17,20 +17,20 @@
   become: true
 
 - name: containerization | install prerequisite
-  package:
+  ansible.builtin.package:
     name: xfsprogs
     state: present
   become: true
 
 - name: containerization | check docker volume is formatted in xfs
-  shell: "xfs_info {{ ansible_containerization_docker_mountpoint }} | grep -c 'ftype=1'"
+  ansible.builtin.shell: "xfs_info {{ ansible_containerization_docker_mountpoint }} | grep -c 'ftype=1'"
   become: yes
   register: mountedxfs
   ignore_errors: true
   changed_when: no
 
 - name: containerization | copy filesystem driver
-  copy:
+  ansible.builtin.copy:
     src: daemon.json
     dest: "{{ ansible_containerization_daemon_configuration_file }}"
     owner: root
@@ -41,7 +41,7 @@
   when: not mountedxfs is failed
 
 - name: containerization | copy execution driver
-  copy:
+  ansible.builtin.copy:
     src: exec-daemon.json
     dest: "{{ ansible_containerization_daemon_configuration_file }}"
     owner: root
@@ -52,31 +52,24 @@
   when: mountedxfs is failed
 
 - name: containerization | install docker
-  import_role:
+  ansible.builtin.import_role:
     name: geerlingguy.docker
   become: true
 
 - name: containerization | install python-docker
-  package:
+  ansible.builtin.package:
     name: python3-docker
     state: present
   become: true
 
 - name: containerization | start
-  systemd:
+  ansible.builtin.systemd:
     name: docker
     state: started
     enabled: true
   become: true
 
 - name: containerization | add docker0 interface to public firewall zone
-  include_role:
-    name: tcharl.ansible_routing
-  vars:
-    firewalld_zones:
-      - name: "{{ ansible_containerization_firewall_zone }}"
-        nics:
-          - "{{ ansible_containerization_docker_network_interface }}"
-    virtual_hosts: []
+  ansible.builtin.include_tasks: firewalld.yml
   when:
     - reverse_proxy_group | default("") | string in group_names
