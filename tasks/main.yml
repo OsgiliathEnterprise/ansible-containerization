@@ -51,7 +51,8 @@
   notify: containerization | restart service
   when: mountedxfs is failed
 
-- import_role:
+- name: containerization | install docker
+  import_role:
     name: geerlingguy.docker
   become: true
 
