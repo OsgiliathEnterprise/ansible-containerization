@@ -77,3 +77,5 @@
         nics:
           - "{{ ansible_containerization_docker_network_interface }}"
     virtual_hosts: []
+  when:
+    - reverse_proxy_group | default("") | string in group_names
