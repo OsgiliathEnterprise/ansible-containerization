@@ -68,8 +68,3 @@
     state: started
     enabled: true
   become: true
-
-- name: containerization | add docker0 interface to public firewall zone
-  ansible.builtin.include_tasks: firewalld.yml
-  when:
-    - reverse_proxy_group | default("") | string in group_names

@@ -19,7 +19,7 @@ platforms:
       - "cache.enable :dnf"
       - "cache.auto_detect = false"
     provider_raw_config_args:
-      - "customize ['storagectl', :id, '--name', 'IDE', '--hostiocache', 'on']"
+      - "customize ['storagectl', :id, '--name', 'IDE Controller', '--hostiocache', 'on']"
     provider_override_args:
       - "persistent_storage.enabled = true"
       - "persistent_storage.location = 'molecule-containerization.vdi'"
