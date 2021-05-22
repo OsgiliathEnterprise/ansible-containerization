@@ -1,4 +1,9 @@
 ---
+- name: containerization | create volumes
+  ansible.builtin.import_role:
+    name: tcharl.ansible_volumes
+  when: standalone_role
+
 # tasks file for docker
 - name: containerization | start firewalld
   ansible.builtin.systemd:

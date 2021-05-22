@@ -7,3 +7,4 @@ ansible_containerization_docker_mountpoint: /var/lib/docker
 ansible_containerization_firewall_zone: docker
 ansible_containerization_docker_network_interface: docker0
 reverse_proxy_group: "reverse_proxy"
+standalone_role: True
