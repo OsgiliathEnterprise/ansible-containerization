@@ -8,7 +8,7 @@ driver:
   name: vagrant
   provider:
     name: libvirt
-lint: yamllint . && flake8 && ansible-lint --exclude=meta
+lint: yamllint . && flake8 && ansible-lint --exclude=meta,.cache
 platforms:
   - name: Fedora-Molecule-Containerization-KVM
     box: tcharl/fedora-33-cgroupv1
