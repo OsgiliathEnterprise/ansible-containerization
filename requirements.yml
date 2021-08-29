@@ -9,4 +9,3 @@ roles:
 
   - name: geerlingguy.docker
     source: https://galaxy.ansible.com
-
