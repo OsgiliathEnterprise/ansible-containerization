@@ -4,6 +4,12 @@
     name: tcharl.ansible_volumes
   when: standalone_role
 
+- name: containerization | install prerequisite - firewalld
+  package:
+    name: firewalld
+    state: present
+  become: true
+
 # tasks file for docker
 - name: containerization | start firewalld
   ansible.builtin.systemd:
