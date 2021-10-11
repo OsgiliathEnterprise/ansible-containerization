@@ -4,6 +4,7 @@ galaxy_info:
   author: OsgiliathEnterprise
   description: Sets overlay2 driver for docker on top of an xfs-formatted disk
   company: Osgiliath Corp.
+  namespace: tcharl
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
