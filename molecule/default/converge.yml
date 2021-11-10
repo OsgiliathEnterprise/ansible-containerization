@@ -24,7 +24,5 @@
             opts: "--wipesignatures y"
             create: true
     manage_lvm: true
-  tasks:
-    - name: "Include ansible-containerization"
-      include_role:
-        name: "ansible-containerization"
+  roles:
+    - role: tcharl.ansible_containerization
