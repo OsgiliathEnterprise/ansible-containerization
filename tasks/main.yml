@@ -4,11 +4,14 @@
     name: tcharl.ansible_volumes
   when: standalone_role
 
-- name: containerization | install prerequisite - firewalld
-  package:
-    name: firewalld
+- name: containerization | install prerequisite - firewalld and cronie
+  ansible.builtin.package:
+    name: "{{ item }}"
     state: present
   become: true
+  with_items:
+    - firewalld
+    - cronie-anacron
 
 # tasks file for docker
 - name: containerization | start firewalld
@@ -78,4 +81,13 @@
     name: docker
     state: started
     enabled: true
+  become: true
+
+- name: containerization | copy docker service restarter
+  ansible.builtin.copy:
+    src: 1docker
+    dest: "/etc/cron.hourly/1docker"
+    owner: root
+    group: root
+    mode: 0755
   become: true

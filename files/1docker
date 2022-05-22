@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+DOCKER_CHECK_COMMAND=$(systemctl -q is-active docker.service)
+RETURNCODE=$?
+echo "return code of the last command is $RETURNCODE"
+if [ $RETURNCODE -gt 0 ]
+then
+        echo "restarting docker"
+        systemctl restart docker
+fi

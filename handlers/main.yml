@@ -2,7 +2,7 @@
 # handlers file for docker
 
 - name: containerization | service restart
-  systemd:
+  ansible.builtin.systemd:
     name: docker
     daemon_reload: yes
     state: restarted

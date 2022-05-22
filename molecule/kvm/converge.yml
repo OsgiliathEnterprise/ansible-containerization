@@ -25,4 +25,4 @@
             create: true
     manage_lvm: true
   roles:
-    - role: tcharl.ansible_containerization
+    - role: ansible-containerization
