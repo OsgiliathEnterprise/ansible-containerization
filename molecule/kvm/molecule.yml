@@ -12,9 +12,9 @@ driver:
     name: libvirt
 platforms:
   - name: Fedora-Molecule-Containerization-KVM
-    box: fedora/35-cloud-base
+    box: fedora/38-cloud-base
     provider_options:
-      driver: '"kvm"'
+      driver: "kvm"
       cpus: 4
       memory: 4096
     provider_raw_config_args:
