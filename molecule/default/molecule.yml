@@ -2,7 +2,7 @@
 dependency:
   name: galaxy
   options:
-    role-file: requirements.yml
+    role-file: requirements-standalone.yml
     roles-path: ${MOLECULE_PROJECT_DIRECTORY}/../community
     requirements-file: requirements-collections.yml
     collections-path: ${MOLECULE_PROJECT_DIRECTORY}/../community-collections
@@ -10,14 +10,9 @@ driver:
   name: vagrant
   provider:
     name: virtualbox
-lint: |
-  set -e
-  yamllint .
-  flake8
-  ANSIBLE_ROLES_PATH=${MOLECULE_PROJECT_DIRECTORY}/..:${MOLECULE_PROJECT_DIRECTORY}/../community:${ANSIBLE_ROLES_PATH} ANSIBLE_COLLECTIONS_PATH=${MOLECULE_PROJECT_DIRECTORY}/../community-collections:${ANSIBLE_COLLECTIONS_PATH} ansible-lint
 platforms:
   - name: Fedora-Molecule-Containerization
-    box: fedora/35-cloud-base
+    box: fedora/38-cloud-base
     provider_options:
       cpus: 2
       memory: 2048
@@ -31,8 +26,6 @@ platforms:
       - "persistent_storage.diskdevice = '/dev/sdb'"
 provisioner:
   name: ansible
-  env:
-    ANSIBLE_ROLES_PATH: "${MOLECULE_PROJECT_DIRECTORY}/..:${MOLECULE_PROJECT_DIRECTORY}/../community:${ANSIBLE_ROLES_PATH}"
 verifier:
   name: testinfra
   env:

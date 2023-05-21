@@ -1,27 +1,18 @@
 ---
-- name: containerization | create volumes
-  ansible.builtin.import_role:
-    name: tcharl.ansible_volumes
-  when: standalone_role
+- name: Requirements
+  ansible.builtin.import_tasks: requirements.yml
+  when:
+    - standalone_role
 
-- name: containerization | install prerequisite - firewalld and cronie
+- name: Install prerequisite - Cronie
   ansible.builtin.package:
     name: "{{ item }}"
     state: present
   become: true
   with_items:
-    - firewalld
     - cronie-anacron
 
-# tasks file for docker
-- name: containerization | start firewalld
-  ansible.builtin.systemd:
-    name: firewalld
-    state: started
-    enabled: true
-  become: true
-
-- name: containerization | create directory
+- name: Create docker configuration directory
   ansible.builtin.file:
     path: "{{ ansible_containerization_configuration_folder }}"
     state: directory
@@ -30,20 +21,20 @@
     mode: 0755
   become: true
 
-- name: containerization | install prerequisite
+- name: Install storage prerequisite
   ansible.builtin.package:
     name: xfsprogs
     state: present
   become: true
 
-- name: containerization | check docker volume is formatted in xfs
+- name: Check docker volume is formatted in xfs
   ansible.builtin.shell: "xfs_info {{ ansible_containerization_docker_mountpoint }} | grep -c 'ftype=1'"
   become: yes
   register: mountedxfs
   ignore_errors: true
   changed_when: no
 
-- name: containerization | copy filesystem driver
+- name: Copy filesystem driver
   ansible.builtin.copy:
     src: daemon.json
     dest: "{{ ansible_containerization_daemon_configuration_file }}"
@@ -54,7 +45,7 @@
   notify: containerization | restart service
   when: not mountedxfs is failed
 
-- name: containerization | copy execution driver
+- name: Copy execution driver
   ansible.builtin.copy:
     src: exec-daemon.json
     dest: "{{ ansible_containerization_daemon_configuration_file }}"
@@ -65,25 +56,40 @@
   notify: containerization | restart service
   when: mountedxfs is failed
 
-- name: containerization | install docker
-  ansible.builtin.import_role:
-    name: geerlingguy.docker
-  become: true
+- name: Facts | retrieve current machine architecture
+  ansible.builtin.setup:
+    gather_subset:
+      - architecture
+  register: current_host_architecture
+  delegate_facts: true
 
-- name: containerization | install python-docker
+- name: Facts | retrieve current machine architecture
+  ansible.builtin.debug:
+    var: current_host_architecture
+    verbosity: 3
+
+- name: Install docker
+  ansible.builtin.include_role:
+    name: geerlingguy.docker
+  vars:
+    docker_compose_version: "{{ docker_compose_vers }}"
+    docker_compose_arch: "{{ current_host_architecture.ansible_facts.ansible_architecture }}"
+    ansible_become: true
+
+- name: Install python-docker
   ansible.builtin.package:
     name: python3-docker
     state: present
   become: true
 
-- name: containerization | start
+- name: Start docker
   ansible.builtin.systemd:
     name: docker
     state: started
     enabled: true
   become: true
 
-- name: containerization | copy docker service restarter
+- name: Copy docker service restarter
   ansible.builtin.copy:
     src: 1docker
     dest: "/etc/cron.hourly/1docker"
@@ -91,3 +97,4 @@
     group: root
     mode: 0755
   become: true
+  notify: containerization | restart service

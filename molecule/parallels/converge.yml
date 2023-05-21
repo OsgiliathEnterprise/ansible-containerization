@@ -2,10 +2,11 @@
 - name: Converge
   hosts: all
   vars:
+    standalone_role: false
     lvm_groups:
       - vgname: non-persistent
         disks:
-          - /dev/sdb1
+          - /dev/sdb
         create: true
         lvmetanames:
           - lvname: thinpool

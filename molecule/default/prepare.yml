@@ -1,0 +1,7 @@
+---
+- name: role
+  hosts: all
+  tasks:
+    - import_role:
+        name: tcharl.ansible_containerization
+        tasks_from: requirements.yml
