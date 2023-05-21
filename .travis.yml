@@ -34,7 +34,7 @@ install:
   - sudo chmod o+rwx /var/run/libvirt/libvirt-sock
 
 script:
-  - mv ../ansible-contenairization ../tcharl.ansible_contenairization
+  - mv ../ansible-containerization ../tcharl.ansible_containerization
   - travis_wait 30 tox -e test-exec -- --scenario-name kvm
 branches:
   only:
