@@ -87,6 +87,10 @@
     name: docker
     state: started
     enabled: true
+  delay: 6
+  retries: 4
+  register: res
+  until: res is success
   become: true
 
 - name: Copy docker service restarter

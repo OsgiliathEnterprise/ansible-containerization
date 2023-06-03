@@ -12,11 +12,11 @@ driver:
     name: libvirt
 platforms:
   - name: Fedora-Molecule-Containerization-KVM
-    box: fedora/38-cloud-base
+    box: ${TESTBOX:-fedora/38-cloud-base}
     provider_options:
       driver: "kvm"
       cpus: 4
-      memory: 4096
+      memory: 12000
     provider_raw_config_args:
       - "storage :file, :size => '1G', :device => 'vdb'"
 provisioner:

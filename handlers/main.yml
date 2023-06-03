@@ -6,5 +6,9 @@
     name: docker
     daemon_reload: yes
     state: restarted
+  delay: 6
+  retries: 4
+  register: res
+  until: res is success
   become: yes
   listen: containerization | restart service
