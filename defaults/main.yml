@@ -6,5 +6,5 @@ ansible_containerization_daemon_configuration_file: "{{ ansible_containerization
 ansible_containerization_docker_mountpoint: /var/lib/docker
 ansible_containerization_firewall_zone: docker
 ansible_containerization_docker_network_interface: docker0
-docker_compose_vers: v2.18.1
+docker_compose_vers: v2.20.3
 standalone_role: True
