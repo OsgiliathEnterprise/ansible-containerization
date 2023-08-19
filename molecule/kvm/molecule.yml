@@ -14,7 +14,7 @@ platforms:
     box: ${TESTBOX:-fedora/38-cloud-base}
     provider_options:
       driver: "kvm"
-      cpus: 3
+      cpus: 2
       memory: 12000
       qemu_use_session: false
     interfaces:
