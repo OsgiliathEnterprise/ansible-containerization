@@ -1,8 +1,9 @@
 ---
 dependency:
   name: galaxy
+  enabled: ${DEPENDENCY_ENABLED:-True}
   options:
-    role-file: requirements-standalone.yml
+    role-file: ${REQUIREMENTS_PATH:-requirements-standalone.yml}
     requirements-file: requirements-collections.yml
 driver:
   name: vagrant
@@ -15,10 +16,11 @@ platforms:
       driver: "kvm"
       cpus: 3
       memory: 12000
+      qemu_use_session: false
     interfaces:
       - auto_config: true
         network_name: private_network
-        ip: "192.168.50.4"
+        type: dhcp
     provider_raw_config_args:
       - "storage :file, :size => '1G', :device => 'vdb'"
 provisioner:
