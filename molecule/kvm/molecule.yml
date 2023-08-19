@@ -15,7 +15,7 @@ platforms:
     provider_options:
       driver: "kvm"
       cpus: 2
-      memory: 12000
+      memory: 4096
       qemu_use_session: false
     interfaces:
       - auto_config: true
