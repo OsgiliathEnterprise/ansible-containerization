@@ -7,32 +7,30 @@ Containerization OverlayFS
 * Tests: [![Build Status](https://app.travis-ci.com/OsgiliathEnterprise/ansible-containerization.svg?branch=master)](https://travis-ci.com/OsgiliathEnterprise/ansible-containerization)
 * Chat: [![Join the chat at https://gitter.im/OsgiliathEnterprise/platform](https://badges.gitter.im/OsgiliathEnterprise/platform.svg)](https://gitter.im/OsgiliathEnterprise/platform?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-This role enriches the original [geerlinguy docker role](https://github.com/geerlingguy/ansible-role-docker) and use the [Ansible volumes plus](https://github.com/OsgiliathEnterprise/ansible-volumes) role in order to add overlayfs driver support configuration for docker
+This role enriches the original [geerlinguy docker role](https://github.com/geerlingguy/ansible-role-docker) and use the [Ansible volumes plus](https://github.com/OsgiliathEnterprise/ansible-volumes) role in order to add overlayfs driver support configuration for docker. Also configures lvms and volumes for docker.
 
 Requirements
 ------------
 
-You should first execute `./configure` first, which will download the requirements in siblings folders.
-roles_path = ./roles:./roles/community
+Tox python 3.6+ and Ansible 2.9+ are required to run the tests.
 
-
-Molecule tests
+Test
 --------------
 
-To execute test, build your own Fedora-33 Packer image enabling cgroup V1 and call it yourpseudo/fedora-33.
-Procedure:
+1. Install the dependencies with `tox -e pipdeps`
+2. Run the tests with `tox -e testexec --scenario-name <your virtualization hypervisor>`
 
-```shell script
-git clone git@github.com:chef/bento.git
-cd "$(dirname ${BASH_SOURCE[0]})/bento/packer_templates/fedora"
-sed -i -e "s/dnf -y install \(.*\)/dnf -y install \1 grubby \&\& grubby --update-kernel=ALL --args=\"systemd.unified_cgroup_hierarchy=0\" --make-default/" bento/packer_templates/fedora/scripts/install-supporting-packages.sh
-packer build -var "box_basename=$distroversion" -only=$PACKER_VM_DRIVER $distroversion.json
+   For example, to run the tests with Vagrant and kvm, you can use:
 
-cd "$(dirname ${BASH_SOURCE[0]})/bento/builds
-vagrant box add $distroversion.virtualbox.box --name platform/$distroshortversion
-```
+   ```bash
+   tox -e testexec --scenario-name kvm
+   ```
 
-However, a base image (tcharl/fedora-33-cgroupv1) with these properties has been published to vagrant cloud so executin `molecule test` will suffice!
+   Or to run the tests with parallels, you can use:
+
+   ```bash
+   tox -e testexec --scenario-name parallels
+   ```
 
 Role Variables
 --------------
