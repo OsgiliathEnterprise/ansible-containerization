@@ -11,7 +11,7 @@ driver:
     name: parallels
 platforms:
   - name: Fedora-Molecule-Containerization-Parallels
-    box: ${TESTBOX:-bento/fedora-38-arm64}
+    box: ${TESTBOX:-bento/fedora-40}
     provider_options:
       cpus: 2
       memory: 2048
