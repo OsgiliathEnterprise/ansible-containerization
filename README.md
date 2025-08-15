@@ -7,12 +7,12 @@ Containerization OverlayFS
 * Tests: [![Build Status](https://app.travis-ci.com/OsgiliathEnterprise/ansible-containerization.svg?branch=master)](https://travis-ci.com/OsgiliathEnterprise/ansible-containerization)
 * Chat: [![Join the chat at https://gitter.im/OsgiliathEnterprise/platform](https://badges.gitter.im/OsgiliathEnterprise/platform.svg)](https://gitter.im/OsgiliathEnterprise/platform?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-This role enriches the original [geerlinguy docker role](https://github.com/geerlingguy/ansible-role-docker) and use the [Ansible volumes plus](https://github.com/OsgiliathEnterprise/ansible-volumes) role in order to add overlayfs driver support configuration for docker. Also configures lvms and volumes for docker.
+This role enriches the original [geerlinguy docker role](https://github.com/geerlingguy/ansible-role-docker) and use the [Ansible volumes plus](https://github.com/OsgiliathEnterprise/ansible-volumes) role in order to add overlayfs driver support configuration for docker and docker compose. Also configures lvms and volumes for docker.
 
 Requirements
 ------------
 
-Tox python 3.6+ and Ansible 2.9+ are required to run the tests.
+Tox, python 3.6+ and Ansible 2.9+ are required to run the tests.
 
 Test
 --------------
