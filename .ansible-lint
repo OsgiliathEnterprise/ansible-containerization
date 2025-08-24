@@ -1,6 +1,7 @@
 exclude_paths:
  - .cache/
  - .poetry/
+ - .ansible/
  - .tox/
  - meta/
  - molecule/

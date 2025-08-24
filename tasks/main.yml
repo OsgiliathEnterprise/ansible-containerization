@@ -18,7 +18,7 @@
     state: directory
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   become: true
 
 - name: Install storage prerequisite
@@ -40,7 +40,7 @@
     dest: "{{ ansible_containerization_daemon_configuration_file }}"
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"
   become: true
   notify: containerization | restart service
   when: not mountedxfs is failed
@@ -51,7 +51,7 @@
     dest: "{{ ansible_containerization_daemon_configuration_file }}"
     owner: root
     group: root
-    mode: 0640
+    mode: "0640"
   become: true
   notify: containerization | restart service
   when: mountedxfs is failed
@@ -99,6 +99,6 @@
     dest: "/etc/cron.hourly/1docker"
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
   become: true
   notify: containerization | restart service
