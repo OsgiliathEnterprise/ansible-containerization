@@ -8,3 +8,11 @@ ansible_containerization_firewall_zone: docker
 ansible_containerization_docker_network_interface: docker0
 docker_compose_vers: v2.20.3
 standalone_role: True
+ansible_containerization_docker_daemon_options:
+  exec-opts:
+      - "native.cgroupdriver=systemd"
+  log-driver: "json-file"
+  log-opts:
+      max-size: "100m"
+      max-file: "3"
+  storage-driver: "overlay2"

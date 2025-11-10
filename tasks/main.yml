@@ -11,6 +11,7 @@
   become: true
   with_items:
     - cronie-anacron
+    - xfsprogs
 
 - name: Create docker configuration directory
   ansible.builtin.file:
@@ -21,18 +22,43 @@
     mode: "0755"
   become: true
 
-- name: Install storage prerequisite
-  ansible.builtin.package:
-    name: xfsprogs
-    state: present
-  become: true
-
 - name: Check docker volume is formatted in xfs
   ansible.builtin.shell: "xfs_info {{ ansible_containerization_docker_mountpoint }} | grep -c 'ftype=1'"
   become: yes
   register: mountedxfs
   ignore_errors: true
   changed_when: no
+
+- name: Facts | retrieve current machine architecture
+  ansible.builtin.setup:
+    gather_subset:
+      - architecture
+  register: current_host_architecture
+  delegate_facts: true
+
+- name: Facts | retrieve current machine architecture
+  ansible.builtin.debug:
+    var: current_host_architecture
+    verbosity: 3
+
+- name: Install docker
+  ansible.builtin.include_role:
+    name: geerlingguy.docker
+  vars:
+    docker_daemon_options: "{{ ansible_containerization_docker_daemon_options }}"
+    docker_compose_version: "{{ docker_compose_vers }}"
+    docker_compose_arch: "{{ current_host_architecture.ansible_facts.ansible_architecture }}"
+    ansible_become: true
+
+- name: Copy docker service restarter
+  ansible.builtin.copy:
+    src: 1docker
+    dest: "/etc/cron.hourly/1docker"
+    owner: root
+    group: root
+    mode: "0755"
+  become: true
+  notify: containerization | restart service
 
 - name: Copy filesystem driver
   ansible.builtin.copy:
@@ -56,26 +82,6 @@
   notify: containerization | restart service
   when: mountedxfs is failed
 
-- name: Facts | retrieve current machine architecture
-  ansible.builtin.setup:
-    gather_subset:
-      - architecture
-  register: current_host_architecture
-  delegate_facts: true
-
-- name: Facts | retrieve current machine architecture
-  ansible.builtin.debug:
-    var: current_host_architecture
-    verbosity: 3
-
-- name: Install docker
-  ansible.builtin.include_role:
-    name: geerlingguy.docker
-  vars:
-    docker_compose_version: "{{ docker_compose_vers }}"
-    docker_compose_arch: "{{ current_host_architecture.ansible_facts.ansible_architecture }}"
-    ansible_become: true
-
 - name: Install python-docker
   ansible.builtin.package:
     name: python3-docker
@@ -92,13 +98,3 @@
   register: res
   until: res is success
   become: true
-
-- name: Copy docker service restarter
-  ansible.builtin.copy:
-    src: 1docker
-    dest: "/etc/cron.hourly/1docker"
-    owner: root
-    group: root
-    mode: "0755"
-  become: true
-  notify: containerization | restart service
