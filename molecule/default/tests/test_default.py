@@ -18,12 +18,14 @@ def test_run_hello_world_container_successfully(host):
 
 
 def test_docker_storage_is_overlay2(host):
-    command = """sudo docker info | grep -c 'overlay2'"""
-    cmd = host.run(command)
+    command = """docker info | grep -c 'overlay2'"""
+    with host.sudo():
+        cmd = host.run(command)
     assert '1' in cmd.stdout
 
 
 def test_docker_group_exists(host):
-    command = """sudo cat /etc/group | grep -c 'docker'"""
-    cmd = host.run(command)
+    command = """cat /etc/group | grep -c 'docker'"""
+    with host.sudo():
+        cmd = host.run(command)
     assert '1' in cmd.stdout
