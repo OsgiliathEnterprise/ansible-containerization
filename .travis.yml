@@ -43,7 +43,7 @@ script:
   - ansible-galaxy role install -r requirements-standalone.yml
   - ansible-galaxy collection install -r requirements-collections.yml
   - mkdir -p /var/tmp || true
-  - chown -R 777 /var/tmp
+  - chmod -R 777 /var/tmp
   - travis_wait 30 tox -e test-exec -- --scenario-name kvm
 branches:
   only:
