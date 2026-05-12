@@ -22,7 +22,7 @@ platforms:
         network_name: private_network
         type: dhcp
     provider_raw_config_args:
-      - "storage :file, :size => '1G', :device => 'vdb'"
+      - "storage :file, :size => '2G', :device => 'vdb'"
 provisioner:
   name: ansible
   env:
