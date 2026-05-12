@@ -17,8 +17,8 @@
   ansible.builtin.file:
     path: "{{ ansible_containerization_configuration_folder }}"
     state: directory
-    owner: root
-    group: root
+    # owner: root
+    # group: root
     mode: "0755"
   become: true
 
@@ -54,8 +54,8 @@
   ansible.builtin.copy:
     src: 1docker
     dest: "/etc/cron.hourly/1docker"
-    owner: root
-    group: root
+    # owner: root
+    # group: root
     mode: "0755"
   become: true
   notify: containerization | restart service
@@ -64,8 +64,8 @@
   ansible.builtin.copy:
     src: daemon.json
     dest: "{{ ansible_containerization_daemon_configuration_file }}"
-    owner: root
-    group: root
+    # owner: root
+    # group: root
     mode: "0640"
   become: true
   notify: containerization | restart service
@@ -75,8 +75,8 @@
   ansible.builtin.copy:
     src: exec-daemon.json
     dest: "{{ ansible_containerization_daemon_configuration_file }}"
-    owner: root
-    group: root
+    # owner: root
+    # group: root
     mode: "0640"
   become: true
   notify: containerization | restart service
