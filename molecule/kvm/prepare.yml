@@ -7,7 +7,7 @@
       changed_when: false
       become: true
     - name: Prepare shared ansible temp directories
-      ansible.builtin.raw: install -d -m 1777 /var/tmp/ansible-remote /tmp/.ansible_async
+      ansible.builtin.raw: install -d -m 1777 /tmp/.ansible/tmp /tmp/.ansible_async
       changed_when: false
       become: true
     - import_role:
